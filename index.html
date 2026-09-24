@@ -1,159 +1,196 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A1</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-:root{--blue:#012169;--red:#E4002B;--orange:#F7931A;--light:#f7f8fc}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:var(--light);color:var(--blue)}
-header{background:var(--blue);color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-.logo{font-weight:800;font-size:24px;display:flex;align-items:center;gap:10px}
-.logo span{font-weight:400;font-size:20px}
-.logo-icon{background:var(--orange);width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:800}
-nav a{color:white;text-decoration:none;margin:0 12px;font-weight:600;opacity:0.9}
-.btn-orange{background:var(--orange);color:white;padding:12px 28px;border-radius:30px;font-weight:800;text-decoration:none;border:none;cursor:pointer;display:inline-block}
-.hero{background:var(--blue);color:white;padding:80px 6%;display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;position:relative;overflow:hidden}
-.hero h1{font-size:52px;line-height:1.1;margin-bottom:16px;position:relative}
-.hero p{font-size:18px;opacity:0.9;margin-bottom:28px;max-width:600px;position:relative}
-.hero-card{background:white;color:var(--blue);border-radius:16px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,0.3)}
-.services{padding:70px 6%;background:white;text-align:center}
-.services h2{font-size:36px;margin-bottom:40px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:left}
-.card{background:var(--light);padding:28px;border-radius:16px;border-left:4px solid var(--orange)}
-.card h3{margin-bottom:10px}
-.trust-bar{background:white;border-top:1px solid #eee;padding:20px 6%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;font-weight:600;font-size:14px}
-.process{background:var(--blue);color:white;padding:70px 6%}
-.step{display:flex;gap:16px;margin-bottom:20px}
-.num{background:var(--orange);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;flex-shrink:0}
-footer{background:#00123a;color:white;padding:40px 6%;text-align:center;font-size:14px;opacity:0.9}
-.arr-retrieve-wrapper{text-align:center;margin:50px auto;max-width:550px}
-.btn-retrieve{background:#012169;color:white;border:2px solid #012169;padding:18px 32px;border-radius:40px;font-weight:800;font-size:17px;cursor:pointer;letter-spacing:0.5px;transition:0.3s;width:100%;max-width:360px}
-.btn-retrieve:hover{background:#0a2f8a}
-.btn-retrieve:disabled{opacity:0.7;cursor:not-allowed}
-.loader-bar{display:none;margin-top:20px;background:#e9ecf5;height:10px;border-radius:10px;overflow:hidden}
-.loader-fill{height:100%;width:0%;background:linear-gradient(90deg, #012169, #F7931A);transition:width 0.3s linear}
-.loader-text{margin-top:12px;font-size:14px;font-weight:600;color:#012169;display:none}
-.cashback-found{display:none;margin-top:24px;background:white;border:2px solid #F7931A;border-left:6px solid #E4002B;padding:24px;border-radius:16px;animation:pop 0.4s ease;box-shadow:0 10px 30px rgba(0,0,0,0.1)}
-.cashback-found a{display:inline-block;margin-top:14px;background:#F7931A;color:white;padding:16px 32px;border-radius:30px;text-decoration:none;font-weight:800;font-size:16px}
-@keyframes pop{from{transform:scale(0.95);opacity:0} to{transform:scale(1);opacity:1}}
-@media(max-width:900px){.hero,.grid3{grid-template-columns:1fr}.hero h1{font-size:36px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Australia Refund Reserve provides transparent information and an initial assessment for people affected by suspected financial scams.">
+  <title>Australia Refund Reserve | Case Assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #071b3a;
+      --blue: #12427a;
+      --orange: #f28b28;
+      --cream: #f7f9fc;
+      --ink: #17243a;
+      --muted: #627089;
+      --line: #dfe6ef;
+      --white: #fff;
+      --shadow: 0 18px 45px rgba(7, 27, 58, .10);
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--ink); font: 16px/1.65 'DM Sans', sans-serif; }
+    a { color: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+
+    header { position: sticky; top: 0; z-index: 10; background: rgba(7, 27, 58, .96); border-bottom: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(12px); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--white); text-decoration: none; font-weight: 800; letter-spacing: -.02em; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--orange); color: var(--navy); font-weight: 800; }
+    .brand small { display: block; color: #afc1db; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+    nav { display: flex; align-items: center; gap: 26px; }
+    nav a { color: #e9f0fa; font-size: 14px; text-decoration: none; }
+    nav a:hover { color: #ffc17f; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 0; border-radius: 10px; background: var(--orange); color: var(--navy); font-weight: 700; text-decoration: none; transition: transform .2s, box-shadow .2s, background .2s; }
+    .button:hover { background: #ffad55; box-shadow: 0 10px 20px rgba(242,139,40,.25); transform: translateY(-2px); }
+    .button.secondary { background: transparent; border: 1px solid #b9c9dc; color: var(--white); }
+
+    .hero { position: relative; overflow: hidden; padding: 92px 0 110px; background: linear-gradient(120deg, var(--navy), #0d3768 62%, #124b82); color: var(--white); }
+    .hero:after { position: absolute; right: -130px; top: -180px; width: 520px; height: 520px; border: 70px solid rgba(242,139,40,.13); border-radius: 50%; content: ''; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 72px; }
+    .eyebrow { color: #ffc17f; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    h1, h2, h3 { font-family: 'Manrope', sans-serif; line-height: 1.15; }
+    h1 { max-width: 680px; margin: 16px 0 22px; font-size: clamp(40px, 6vw, 70px); letter-spacing: -.055em; }
+    .hero-copy { max-width: 620px; color: #d9e4f3; font-size: 18px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .fine-print { margin-top: 17px; color: #b8c8dd; font-size: 13px; }
+    .status-card { padding: 28px; border: 1px solid rgba(255,255,255,.18); border-radius: 20px; background: rgba(255,255,255,.10); box-shadow: var(--shadow); backdrop-filter: blur(8px); }
+    .status-card h2 { margin: 12px 0 18px; font-size: 25px; }
+    .status-card p { color: #c9d8e9; font-size: 14px; }
+    .status-list { display: grid; gap: 14px; margin-top: 24px; padding: 0; list-style: none; }
+    .status-list li { display: flex; gap: 10px; align-items: flex-start; color: #f1f6fc; font-size: 14px; }
+    .status-list span { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 50%; background: rgba(242,139,40,.2); color: #ffc17f; flex: 0 0 auto; }
+
+    section { padding: 92px 0; }
+    .section-heading { max-width: 660px; margin-bottom: 38px; }
+    .section-heading h2 { margin-top: 10px; color: var(--navy); font-size: clamp(30px, 4vw, 44px); letter-spacing: -.04em; }
+    .section-heading p { margin-top: 14px; color: var(--muted); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--white); box-shadow: 0 8px 22px rgba(7,27,58,.04); }
+    .card-icon { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 20px; border-radius: 12px; background: #fff1e3; color: #bb5d00; font-size: 21px; }
+    .card h3 { margin-bottom: 10px; color: var(--navy); font-size: 20px; }
+    .card p { color: var(--muted); font-size: 15px; }
+
+    .process { background: var(--white); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; counter-reset: steps; }
+    .step { position: relative; padding-top: 60px; }
+    .step:before { position: absolute; top: 0; left: 0; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--navy); color: var(--white); content: counter(steps); counter-increment: steps; font-weight: 700; }
+    .step:not(:last-child):after { position: absolute; top: 20px; left: 58px; right: -20px; border-top: 1px dashed #c8d3e0; content: ''; }
+    .step h3 { margin-bottom: 10px; color: var(--navy); font-size: 20px; }
+    .step p { color: var(--muted); font-size: 15px; }
+
+    .notice { padding: 24px 28px; border-left: 4px solid var(--orange); border-radius: 10px; background: #fff8ef; color: #684019; }
+    .notice strong { display: block; margin-bottom: 4px; color: var(--navy); }
+    .contact { background: var(--navy); color: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 40px; }
+    .contact h2 { margin-top: 10px; font-size: clamp(30px, 4vw, 44px); letter-spacing: -.04em; }
+    .contact p { max-width: 610px; margin-top: 14px; color: #c9d8e9; }
+
+    footer { padding: 30px 0; background: #04132b; color: #aebed2; font-size: 13px; }
+    footer a { color: #ffc17f; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+    @media (max-width: 800px) {
+      nav a:not(.button) { display: none; }
+      .hero { padding: 64px 0 76px; }
+      .hero-grid, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+      section { padding: 68px 0; }
+      .cards, .steps { grid-template-columns: 1fr; gap: 16px; }
+      .step:not(:last-child):after { display: none; }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Australia Refund Reserve home">
+        <span class="brand-mark">A1</span>
+        <span>Australia Refund Reserve<small>Case assessment service</small></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#process">How it works</a>
+        <a href="#about">Important information</a>
+        <a class="button" href="#contact">Start an assessment</a>
+      </nav>
+    </div>
+  </header>
 
-<header>
-  <div class="logo"><div class="logo-icon">₿</div> Australia <span>Refund Reserve</span></div>
-  <nav>
-    <a href="#">Home</a><a href="#">Services</a><a href="#">FAQ</a>
-    <a href="https://signal.me/#eu/RnA2yboAbhI9T7dM2CRqGBy_lAkP5lb6dh8qg6w15cQCkmJTJLZDUbSunrSFZ98z" target="_blank" class="btn-orange" style="margin-left:20px">Free Case Review</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <div>
-    <h1>Recover Your Lost Funds.<br>Australia's Trusted Retrieval Experts.</h1>
-    <p>We recover funds lost to investment scams, crypto fraud, and unauthorized transactions. Our licensed investigators work to trace, negotiate, and secure your refund — safely and confidentially.</p>
-    
-    <div class="arr-retrieve-wrapper" style="text-align:left; margin:30px 0 0 0;">
-      <button id="retrieveBtn" class="btn-retrieve" onclick="startRetrieve()">
-        ₿ REQUEST RETRIEVE
-      </button>
-      <div id="loaderBar" class="loader-bar">
-        <div id="loaderFill" class="loader-fill"></div>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">A clearer next step after financial fraud</div>
+          <h1>Understand your options. Move forward with confidence.</h1>
+          <p class="hero-copy">Australia Refund Reserve provides an initial, confidential assessment for people affected by suspected investment scams, crypto fraud, or unauthorised transactions.</p>
+          <div class="actions">
+            <a class="button" href="#contact">Request an assessment</a>
+            <a class="button secondary" href="#process">Learn how it works</a>
+          </div>
+          <p class="fine-print">No guaranteed outcomes. We will explain the available options before any paid work begins.</p>
+        </div>
+        <aside class="status-card" aria-label="Assessment overview">
+          <div class="eyebrow">What happens first</div>
+          <h2>A practical review of your situation</h2>
+          <p>We listen to what happened, identify the relevant records, and outline sensible next steps. We never ask for passwords, seed phrases, or remote access to your devices.</p>
+          <ul class="status-list">
+            <li><span>1</span><b>Share the key facts</b></li>
+            <li><span>2</span><b>Review possible options</b></li>
+            <li><span>3</span><b>Choose your next step</b></li>
+          </ul>
+        </aside>
       </div>
-      <div id="loaderText" class="loader-text">Scanning blockchain & bank records... <span id="timer">34s</span> • Tracing wallet...</div>
-      <div id="cashbackBox" class="cashback-found">
-        <div style="color:#012169; font-weight:800; font-size:20px;">✅ AUD CASHBACK FOUND FOR REFUND</div>
-        <p style="font-size:14px; margin-top:8px; color:#333;">Our system has identified eligible funds for your case. Click below to access your refund portal on Signal.</p>
-        <a href="https://signal.me/#eu/RnA2yboAbhI9T7dM2CRqGBy_lAkP5lb6dh8qg6w15cQCkmJTJLZDUbSunrSFZ98z" target="_blank">
-          CLICK TO ACCESS
-        </a>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow" style="color:#bb5d00">Areas we can discuss</div>
+          <h2>Focused support for complex loss events.</h2>
+          <p>Every case is different. An assessment helps separate realistic recovery avenues from claims that cannot be substantiated.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><div class="card-icon">₿</div><h3>Digital asset incidents</h3><p>Organise transaction records, wallet information, and exchange correspondence for a structured review.</p></article>
+          <article class="card"><div class="card-icon">↗</div><h3>Investment scams</h3><p>Document platform activity, communications, payments, and the timeline of events.</p></article>
+          <article class="card"><div class="card-icon">✓</div><h3>Unauthorised payments</h3><p>Prepare a clear record to discuss with your bank, payment provider, or relevant authority.</p></article>
+        </div>
       </div>
+    </section>
+
+    <section class="process" id="process">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow" style="color:#bb5d00">A transparent process</div>
+          <h2>Simple, careful, and evidence-led.</h2>
+        </div>
+        <div class="steps">
+          <article class="step"><h3>Initial conversation</h3><p>Tell us what happened without sharing sensitive credentials or access codes.</p></article>
+          <article class="step"><h3>Document review</h3><p>We help organise the relevant dates, payments, communications, and account records.</p></article>
+          <article class="step"><h3>Options and next steps</h3><p>You receive a clear explanation of possible avenues and their limitations.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="notice">
+          <strong>Important information</strong>
+          We do not guarantee recovery, represent government agencies, or claim to have located funds before reviewing your individual circumstances. Please verify our business details and any professional credentials independently. Never pay an upfront “release”, “tax”, or “verification” fee to access recovered funds.
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+        <div>
+          <div class="eyebrow">Start with a conversation</div>
+          <h2>Ready to make sense of what happened?</h2>
+          <p>Contact us for an initial assessment. Please do not send passwords, private keys, seed phrases, banking PINs, or identity documents through an unverified channel.</p>
+        </div>
+        <a class="button" href="https://signal.me/#eu/RnA2yboAbhI9T7dM2CRqGBy_lAkP5lb6dh8qg6w15cQCkmJTJLZDUbSunrSFZ98z" target="_blank" rel="noopener noreferrer">Contact support</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <span>© 2026 Australia Refund Reserve</span>
+      <span>Information only. Outcomes depend on the facts of each case.</span>
     </div>
-
-    <div style="display:flex;gap:10px;margin-top:30px;flex-wrap:wrap;font-size:13px;font-weight:600">
-      <div>✓ ASIC Registered</div><div>🔒 Secure & Confidential</div><div>🛡️ No Win, No Fee</div><div>⭐ 1000+ Cases</div>
-    </div>
-  </div>
-  <div class="hero-card">
-    <small style="background:#ffe9d1;color:var(--blue);padding:6px 12px;border-radius:20px;font-weight:800">Your Case Status</small>
-    <div style="display:flex;gap:16px;align-items:center;margin-top:20px">
-      <div style="background:var(--orange);width:60px;height:60px;border-radius:50%;display:grid;place-items:center;color:white;font-size:32px;font-weight:800">₿</div>
-      <div><b>Crypto Recovery In Progress</b><br><progress value="65" max="100" style="width:200px;accent-color:var(--orange)"></progress> 65%</div>
-    </div>
-    <ul style="margin-top:20px;list-style:none;line-height:2">
-      <li>✓ Wallet Traced • Completed</li>
-      <li>✓ Exchange Contacted • Completed</li>
-      <li>✓ Fund Retrieval • In Progress</li>
-    </ul>
-  </div>
-</section>
-
-<section class="services">
-  <p style="color:var(--red);font-weight:800;letter-spacing:1px">OUR SERVICES</p>
-  <h2>Specialized Fund & Crypto Recovery</h2>
-  <div class="grid3">
-    <div class="card"><h3>₿ Cryptocurrency Recovery</h3><p>Trace lost or stolen crypto. We work with blockchain forensics to recover Bitcoin, Ethereum and other assets.</p></div>
-    <div class="card" style="border-left-color:var(--red)"><h3>🏛️ Scam & Investment Recovery</h3><p>Recover funds from investment scams, romance scams, and fraudulent trading platforms.</p></div>
-    <div class="card" style="border-left-color:var(--blue)"><h3>🛡️ Bank Transfer Retrieval</h3><p>Assist with chargebacks and bank disputes for unauthorized transactions.</p></div>
-  </div>
-</section>
-
-<section class="process">
-  <div style="max-width:900px;margin:auto">
-    <h2 style="text-align:center;margin-bottom:40px;font-size:36px">How We Get Your Money Back in 3 Steps</h2>
-    <div class="step"><div class="num">1</div><div><h3>Free Confidential Consultation</h3><p>Tell us what happened. We analyze your case with blockchain tools and bank trace systems.</p></div></div>
-    <div class="step"><div class="num">2</div><div><h3>Investigation & Tracing</h3><p>Our AU-licensed team traces funds, contacts exchanges, and prepares legal chargeback documents.</p></div></div>
-    <div class="step"><div class="num">3</div><div><h3>Recovery & Refund</h3><p>We negotiate and enforce retrieval. You only pay on success. No win, no fee guarantee.</p></div></div>
-  </div>
-</section>
-
-<div class="trust-bar">
-  <div>🇦🇺 Registered in Australia<br>ABN: 12 345 678 900</div>
-  <div>🔐 SSL Secured & Encrypted</div>
-  <div>⭐ 5.0/500+ Client Reviews</div>
-  <div>🤝 Regulated & Compliant</div>
-</div>
-
-<footer>
-  © 2026 Australia Refund Reserve • Licensed Recovery Service • Privacy Policy • Terms • Contact: <a href="https://signal.me/#eu/RnA2yboAbhI9T7dM2CRqGBy_lAkP5lb6dh8qg6w15cQCkmJTJLZDUbSunrSFZ98z" style="color:#F7931A">Signal Support</a><br><br>
-  Disclaimer: Recovery success depends on case specifics.
-</footer>
-
-<script>
-function startRetrieve(){
-  const btn = document.getElementById('retrieveBtn');
-  const bar = document.getElementById('loaderBar');
-  const fill = document.getElementById('loaderFill');
-  const text = document.getElementById('loaderText');
-  const timerEl = document.getElementById('timer');
-  const box = document.getElementById('cashbackBox');
-  btn.disabled = true;
-  btn.innerHTML = "⏳ PROCESSING - PLEASE WAIT 34s";
-  bar.style.display = "block";
-  text.style.display = "block";
-  box.style.display = "none";
-  let total = 34;
-  let current = 0;
-  const interval = setInterval(()=>{
-    current++;
-    let percent = (current / total) * 100;
-    fill.style.width = percent + "%";
-    timerEl.innerText = (total - current) + "s";
-    if(current >= total){
-      clearInterval(interval);
-      bar.style.display = "none";
-      text.style.display = "none";
-      box.style.display = "block";
-      btn.style.display = "none";
-      box.scrollIntoView({behavior: 'smooth'});
-    }
-  }, 1000);
-}
-</script>
-
+  </footer>
 </body>
 </html>
