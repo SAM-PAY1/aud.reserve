@@ -1,196 +1,499 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Australia Refund Reserve provides transparent information and an initial assessment for people affected by suspected financial scams.">
-  <title>Australia Refund Reserve | Case Assessment</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy: #071b3a;
-      --blue: #12427a;
-      --orange: #f28b28;
-      --cream: #f7f9fc;
-      --ink: #17243a;
-      --muted: #627089;
-      --line: #dfe6ef;
-      --white: #fff;
-      --shadow: 0 18px 45px rgba(7, 27, 58, .10);
+      --bg: #0a0e17;
+      --bg-elevated: #121826;
+      --bg-card: #171f31;
+      --border: #1e2a42;
+      --border-hover: #2a3a5c;
+      --text: #e2e8f0;
+      --text-muted: #64748b;
+      --text-dim: #475569;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --success: #22c55e;
+      --success-bg: rgba(34, 197, 94, 0.1);
+      --error: #ef4444;
+      --error-bg: rgba(239, 68, 68, 0.1);
+      --warning: #f59e0b;
+      --warning-bg: rgba(245, 158, 11, 0.08);
     }
-
-    * { box-sizing: border-box; margin: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--cream); color: var(--ink); font: 16px/1.65 'DM Sans', sans-serif; }
-    a { color: inherit; }
-    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
-
-    header { position: sticky; top: 0; z-index: 10; background: rgba(7, 27, 58, .96); border-bottom: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(12px); }
-    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--white); text-decoration: none; font-weight: 800; letter-spacing: -.02em; }
-    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--orange); color: var(--navy); font-weight: 800; }
-    .brand small { display: block; color: #afc1db; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
-    nav { display: flex; align-items: center; gap: 26px; }
-    nav a { color: #e9f0fa; font-size: 14px; text-decoration: none; }
-    nav a:hover { color: #ffc17f; }
-    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 0; border-radius: 10px; background: var(--orange); color: var(--navy); font-weight: 700; text-decoration: none; transition: transform .2s, box-shadow .2s, background .2s; }
-    .button:hover { background: #ffad55; box-shadow: 0 10px 20px rgba(242,139,40,.25); transform: translateY(-2px); }
-    .button.secondary { background: transparent; border: 1px solid #b9c9dc; color: var(--white); }
-
-    .hero { position: relative; overflow: hidden; padding: 92px 0 110px; background: linear-gradient(120deg, var(--navy), #0d3768 62%, #124b82); color: var(--white); }
-    .hero:after { position: absolute; right: -130px; top: -180px; width: 520px; height: 520px; border: 70px solid rgba(242,139,40,.13); border-radius: 50%; content: ''; }
-    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 72px; }
-    .eyebrow { color: #ffc17f; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-    h1, h2, h3 { font-family: 'Manrope', sans-serif; line-height: 1.15; }
-    h1 { max-width: 680px; margin: 16px 0 22px; font-size: clamp(40px, 6vw, 70px); letter-spacing: -.055em; }
-    .hero-copy { max-width: 620px; color: #d9e4f3; font-size: 18px; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-    .fine-print { margin-top: 17px; color: #b8c8dd; font-size: 13px; }
-    .status-card { padding: 28px; border: 1px solid rgba(255,255,255,.18); border-radius: 20px; background: rgba(255,255,255,.10); box-shadow: var(--shadow); backdrop-filter: blur(8px); }
-    .status-card h2 { margin: 12px 0 18px; font-size: 25px; }
-    .status-card p { color: #c9d8e9; font-size: 14px; }
-    .status-list { display: grid; gap: 14px; margin-top: 24px; padding: 0; list-style: none; }
-    .status-list li { display: flex; gap: 10px; align-items: flex-start; color: #f1f6fc; font-size: 14px; }
-    .status-list span { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 50%; background: rgba(242,139,40,.2); color: #ffc17f; flex: 0 0 auto; }
-
-    section { padding: 92px 0; }
-    .section-heading { max-width: 660px; margin-bottom: 38px; }
-    .section-heading h2 { margin-top: 10px; color: var(--navy); font-size: clamp(30px, 4vw, 44px); letter-spacing: -.04em; }
-    .section-heading p { margin-top: 14px; color: var(--muted); }
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .card { padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--white); box-shadow: 0 8px 22px rgba(7,27,58,.04); }
-    .card-icon { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 20px; border-radius: 12px; background: #fff1e3; color: #bb5d00; font-size: 21px; }
-    .card h3 { margin-bottom: 10px; color: var(--navy); font-size: 20px; }
-    .card p { color: var(--muted); font-size: 15px; }
-
-    .process { background: var(--white); }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; counter-reset: steps; }
-    .step { position: relative; padding-top: 60px; }
-    .step:before { position: absolute; top: 0; left: 0; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--navy); color: var(--white); content: counter(steps); counter-increment: steps; font-weight: 700; }
-    .step:not(:last-child):after { position: absolute; top: 20px; left: 58px; right: -20px; border-top: 1px dashed #c8d3e0; content: ''; }
-    .step h3 { margin-bottom: 10px; color: var(--navy); font-size: 20px; }
-    .step p { color: var(--muted); font-size: 15px; }
-
-    .notice { padding: 24px 28px; border-left: 4px solid var(--orange); border-radius: 10px; background: #fff8ef; color: #684019; }
-    .notice strong { display: block; margin-bottom: 4px; color: var(--navy); }
-    .contact { background: var(--navy); color: var(--white); }
-    .contact-grid { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 40px; }
-    .contact h2 { margin-top: 10px; font-size: clamp(30px, 4vw, 44px); letter-spacing: -.04em; }
-    .contact p { max-width: 610px; margin-top: 14px; color: #c9d8e9; }
-
-    footer { padding: 30px 0; background: #04132b; color: #aebed2; font-size: 13px; }
-    footer a { color: #ffc17f; }
-    .footer-row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-
-    @media (max-width: 800px) {
-      nav a:not(.button) { display: none; }
-      .hero { padding: 64px 0 76px; }
-      .hero-grid, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
-      section { padding: 68px 0; }
-      .cards, .steps { grid-template-columns: 1fr; gap: 16px; }
-      .step:not(:last-child):after { display: none; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
+    .font-mono { font-family: "JetBrains Mono", monospace; }
+    .bg-glow::before {
+      content: "";
+      position: fixed;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .shimmer {
+      background: linear-gradient(90deg, var(--bg-elevated) 0%, var(--bg-card) 50%, var(--bg-elevated) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s ease-in-out infinite;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in-up { animation: fadeInUp 0.3s ease-out; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spin { animation: spin 0.8s linear infinite; }
+    button { font-family: inherit; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#top" aria-label="Australia Refund Reserve home">
-        <span class="brand-mark">A1</span>
-        <span>Australia Refund Reserve<small>Case assessment service</small></span>
-      </a>
-      <nav aria-label="Main navigation">
-        <a href="#services">Services</a>
-        <a href="#process">How it works</a>
-        <a href="#about">Important information</a>
-        <a class="button" href="#contact">Start an assessment</a>
-      </nav>
-    </div>
-  </header>
+  <div class="bg-glow" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 60px;position:relative;">
+    <div style="width:100%;max-width:560px;position:relative;z-index:1;">
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">A clearer next step after financial fraud</div>
-          <h1>Understand your options. Move forward with confidence.</h1>
-          <p class="hero-copy">Australia Refund Reserve provides an initial, confidential assessment for people affected by suspected investment scams, crypto fraud, or unauthorised transactions.</p>
-          <div class="actions">
-            <a class="button" href="#contact">Request an assessment</a>
-            <a class="button secondary" href="#process">Learn how it works</a>
+      <!-- Header -->
+      <header style="display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent) 0%,#1d4ed8 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(59,130,246,0.3);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 2L11 13" /><path d="M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
           </div>
-          <p class="fine-print">No guaranteed outcomes. We will explain the available options before any paid work begins.</p>
+          <span style="font-size:1.05rem;font-weight:600;color:var(--text);letter-spacing:-0.01em;">Payment Portal</span>
         </div>
-        <aside class="status-card" aria-label="Assessment overview">
-          <div class="eyebrow">What happens first</div>
-          <h2>A practical review of your situation</h2>
-          <p>We listen to what happened, identify the relevant records, and outline sensible next steps. We never ask for passwords, seed phrases, or remote access to your devices.</p>
-          <ul class="status-list">
-            <li><span>1</span><b>Share the key facts</b></li>
-            <li><span>2</span><b>Review possible options</b></li>
-            <li><span>3</span><b>Choose your next step</b></li>
+        <div id="headerWallet"></div>
+      </header>
+
+      <!-- Main Card -->
+      <main>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:44px 32px 36px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.6;"></div>
+
+          <!-- Transfer Amount -->
+          <div style="text-align:center;margin-bottom:8px;">
+            <span style="font-size:0.72rem;font-weight:600;color:var(--text-dim);letter-spacing:0.18em;text-transform:uppercase;">Transfer Amount</span>
+          </div>
+          <div id="amountContainer" style="text-align:center;display:none;">
+            <div class="font-mono" style="font-size:2.8rem;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1.1;" id="amountValue">0.00817</div>
+            <div style="font-size:1.1rem;font-weight:600;color:var(--text-muted);margin-top:2px;">ETH</div>
+          </div>
+          <div id="amountLoading" style="display:flex;justify-content:center;margin-top:8px;">
+            <div class="shimmer" style="width:180px;height:52px;border-radius:8px;"></div>
+          </div>
+
+          <!-- Owner Address -->
+          <div style="margin-top:28px;">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+              <span style="font-size:0.72rem;font-weight:600;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase;">Owner (From)</span>
+            </div>
+            <div id="ownerRow" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:12px 16px;cursor:pointer;transition:border-color 0.2s ease;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'" title="Click to copy">
+              <span class="font-mono" style="font-size:0.82rem;color:var(--text);word-break:break-all;" id="ownerDisplay">0x102B9843f7a3dac838AE29F62d28d3c31eC13041</span>
+              <span id="ownerCopyIcon" style="color:var(--text-dim);display:flex;flex-shrink:0;transition:color 0.2s ease;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div style="text-align:center;margin:12px 0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          </div>
+
+          <!-- Recipient Address -->
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+              <span style="font-size:0.72rem;font-weight:600;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase;">Recipient (To)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-dim);">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </div>
+            <div id="payeeRow" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:12px 16px;cursor:pointer;transition:border-color 0.2s ease;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'" title="Click to copy">
+              <span class="font-mono" style="font-size:0.82rem;color:var(--text);word-break:break-all;" id="payeeDisplay">0x80750bA2a09b363a8424A42503f95c9824AA8cf8</span>
+              <span id="payeeCopyIcon" style="color:var(--text-dim);display:flex;flex-shrink:0;transition:color 0.2s ease;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Contract Balance -->
+          <div style="margin-top:20px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:0.82rem;color:var(--text-muted);">Contract Balance</span>
+            <span class="font-mono" style="font-size:0.9rem;font-weight:600;color:var(--text);" id="contractBalance">0.0 ETH</span>
+          </div>
+
+          <!-- Deposit Button -->
+          <button id="depositBtn" style="width:100%;margin-top:20px;background:var(--bg-elevated);color:var(--text-dim);border:1px solid var(--border);border-radius:12px;padding:14px 24px;font-size:0.9rem;font-weight:600;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s ease;" disabled>
+            <span id="depositBtnContent">Connect Wallet to Deposit</span>
+          </button>
+
+          <!-- Transfer Button -->
+          <button id="transferBtn" style="width:100%;margin-top:12px;background:var(--bg-elevated);color:var(--text-dim);border:none;border-radius:12px;padding:16px 24px;font-size:1rem;font-weight:700;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.2s ease;" disabled>
+            <span id="transferBtnContent">Connect Wallet to Transfer</span>
+          </button>
+
+          <!-- Status -->
+          <div id="statusBadge"></div>
+        </div>
+
+        <!-- Disclosure -->
+        <div style="margin-top:32px;background:var(--warning-bg);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:20px 22px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <span style="color:var(--warning);display:flex;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+            </span>
+            <h3 style="margin:0;font-size:0.88rem;font-weight:600;color:var(--warning);letter-spacing:0.02em;text-transform:uppercase;">Before You Proceed</h3>
+          </div>
+          <ul style="margin:0;padding-left:18px;font-size:0.82rem;color:var(--text-muted);line-height:1.7;list-style-type:disc;">
+            <li><strong style="color:var(--text);">Transactions are irreversible.</strong> Once ETH is sent, it cannot be recovered.</li>
+            <li><strong style="color:var(--text);">Step 1 — Deposit:</strong> Fund the contract with ETH (owner only).</li>
+            <li><strong style="color:var(--text);">Step 2 — Transfer:</strong> The contract sends exactly 0.00817 ETH to the recipient (owner only).</li>
+            <li>Gas fees apply in addition to the transfer amount and are paid to the network.</li>
           </ul>
-        </aside>
-      </div>
-    </section>
+        </div>
 
-    <section id="services">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow" style="color:#bb5d00">Areas we can discuss</div>
-          <h2>Focused support for complex loss events.</h2>
-          <p>Every case is different. An assessment helps separate realistic recovery avenues from claims that cannot be substantiated.</p>
-        </div>
-        <div class="cards">
-          <article class="card"><div class="card-icon">₿</div><h3>Digital asset incidents</h3><p>Organise transaction records, wallet information, and exchange correspondence for a structured review.</p></article>
-          <article class="card"><div class="card-icon">↗</div><h3>Investment scams</h3><p>Document platform activity, communications, payments, and the timeline of events.</p></article>
-          <article class="card"><div class="card-icon">✓</div><h3>Unauthorised payments</h3><p>Prepare a clear record to discuss with your bank, payment provider, or relevant authority.</p></article>
-        </div>
-      </div>
-    </section>
+        <!-- Footer -->
+        <footer style="margin-top:40px;text-align:center;">
+          <p style="font-size:0.75rem;color:var(--text-dim);margin:0;">All transactions are on-chain and final</p>
+        </footer>
+      </main>
 
-    <section class="process" id="process">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow" style="color:#bb5d00">A transparent process</div>
-          <h2>Simple, careful, and evidence-led.</h2>
-        </div>
-        <div class="steps">
-          <article class="step"><h3>Initial conversation</h3><p>Tell us what happened without sharing sensitive credentials or access codes.</p></article>
-          <article class="step"><h3>Document review</h3><p>We help organise the relevant dates, payments, communications, and account records.</p></article>
-          <article class="step"><h3>Options and next steps</h3><p>You receive a clear explanation of possible avenues and their limitations.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <div class="notice">
-          <strong>Important information</strong>
-          We do not guarantee recovery, represent government agencies, or claim to have located funds before reviewing your individual circumstances. Please verify our business details and any professional credentials independently. Never pay an upfront “release”, “tax”, or “verification” fee to access recovered funds.
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="container contact-grid">
-        <div>
-          <div class="eyebrow">Start with a conversation</div>
-          <h2>Ready to make sense of what happened?</h2>
-          <p>Contact us for an initial assessment. Please do not send passwords, private keys, seed phrases, banking PINs, or identity documents through an unverified channel.</p>
-        </div>
-        <a class="button" href="https://signal.me/#eu/RnA2yboAbhI9T7dM2CRqGBy_lAkP5lb6dh8qg6w15cQCkmJTJLZDUbSunrSFZ98z" target="_blank" rel="noopener noreferrer">Contact support</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-row">
-      <span>© 2026 Australia Refund Reserve</span>
-      <span>Information only. Outcomes depend on the facts of each case.</span>
     </div>
-  </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
+  <script>
+    const CONTRACT_ADDRESS = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8";
+    const OWNER_FALLBACK = "0x102B9843f7a3dac838AE29F62d28d3c31eC13041";
+    const RECIPIENT_FALLBACK = "0x80750bA2a09b363a8424A42503f95c9824AA8cf8";
+    const ABI = [
+      "function OWNER() view returns (address)",
+      "function RECIPIENT() view returns (address)",
+      "function TRANSFER_AMOUNT() view returns (uint256)",
+      "function transfer()",
+      "function deposit() payable",
+      "function getBalance() view returns (uint256)",
+      "event Transferred(address indexed from, address indexed to, uint256 amount)",
+    ];
+
+    let provider = null;
+    let signer = null;
+    let contract = null;
+    let connected = false;
+    let txStatus = null;
+    let isOwner = false;
+
+    function abbreviate(addr) {
+      if (!addr) return "";
+      return addr.slice(0, 6) + "\u2026" + addr.slice(-4);
+    }
+
+    function shortHash(hash) {
+      if (!hash) return "";
+      return hash.slice(0, 10) + "\u2026" + hash.slice(-8);
+    }
+
+    // ── Status Badge ──
+    function showStatus(status, message, txHash) {
+      const el = document.getElementById("statusBadge");
+      if (!status) { el.innerHTML = ""; el.style.display = "none"; return; }
+
+      const configs = {
+        pending: { bg: "var(--accent-glow)", border: "var(--accent)", color: "var(--accent)", label: "Processing\u2026", icon: '<div class="spin" style="width:16px;height:16px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;"></div>' },
+        success: { bg: "var(--success-bg)", border: "var(--success)", color: "var(--success)", label: "Transaction Confirmed", icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' },
+        error: { bg: "var(--error-bg)", border: "var(--error)", color: "var(--error)", label: "Transaction Failed", icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' },
+      };
+      const c = configs[status];
+      el.style.display = "block";
+      el.style.background = c.bg;
+      el.style.border = "1px solid " + c.border;
+      el.style.borderRadius = "12px";
+      el.style.padding = "16px 20px";
+      el.style.marginTop = "20px";
+      el.className = "fade-in-up";
+
+      let txHtml = "";
+      if (txHash) {
+        txHtml = '<div style="margin-top:8px;display:flex;align-items:center;gap:6px;">' +
+          '<span class="font-mono" style="font-size:0.78rem;color:var(--text-dim);">' + shortHash(txHash) + '</span>' +
+          '<a href="#" id="copyTxHash" style="color:var(--text-dim);display:flex;align-items:center;cursor:pointer;" title="Copy transaction hash">' +
+          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></a></div>';
+      }
+
+      el.innerHTML =
+        '<div style="display:flex;align-items:flex-start;gap:12px;">' +
+          '<div style="color:' + c.color + ';flex-shrink:0;margin-top:2px;">' + c.icon + '</div>' +
+          '<div style="flex:1;min-width:0;">' +
+            '<div style="font-weight:600;font-size:0.9rem;color:' + c.color + ';letter-spacing:0.01em;">' + c.label + '</div>' +
+            (message ? '<div style="font-size:0.83rem;color:var(--text-muted);margin-top:4px;word-break:break-word;">' + message + '</div>' : '') +
+            txHtml +
+          '</div>' +
+          '<button id="closeStatus" style="background:transparent;border:none;color:var(--text-dim);cursor:pointer;padding:4px;flex-shrink:0;line-height:0;" title="Dismiss">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+          '</button>' +
+        '</div>';
+
+      if (txHash) {
+        document.getElementById("copyTxHash").addEventListener("click", function(e) {
+          e.preventDefault();
+          navigator.clipboard && navigator.clipboard.writeText(txHash);
+        });
+      }
+      document.getElementById("closeStatus").addEventListener("click", function() {
+        showStatus(null);
+        txStatus = null;
+        updateButtons();
+      });
+    }
+
+    // ── Update buttons ──
+    function updateButtons() {
+      const dBtn = document.getElementById("depositBtn");
+      const dContent = document.getElementById("depositBtnContent");
+      const tBtn = document.getElementById("transferBtn");
+      const tContent = document.getElementById("transferBtnContent");
+
+      if (!connected) {
+        dBtn.disabled = true;
+        dBtn.style.cursor = "not-allowed";
+        dBtn.style.background = "var(--bg-elevated)";
+        dBtn.style.color = "var(--text-dim)";
+        dContent.textContent = "Connect Wallet to Deposit";
+
+        tBtn.disabled = true;
+        tBtn.style.cursor = "not-allowed";
+        tBtn.style.background = "var(--bg-elevated)";
+        tBtn.style.color = "var(--text-dim)";
+        tContent.textContent = "Connect Wallet to Transfer";
+        return;
+      }
+
+      if (txStatus === "pending") {
+        dBtn.disabled = true;
+        dBtn.style.cursor = "not-allowed";
+        dContent.innerHTML = '<div class="spin" style="width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;"></div> Processing\u2026';
+        tBtn.disabled = true;
+        tBtn.style.cursor = "not-allowed";
+        tContent.innerHTML = '<div class="spin" style="width:18px;height:18px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;"></div> Processing\u2026';
+        return;
+      }
+
+      if (isOwner) {
+        dBtn.disabled = false;
+        dBtn.style.cursor = "pointer";
+        dBtn.style.background = "var(--bg-elevated)";
+        dBtn.style.color = "var(--text)";
+        dContent.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px;"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg> Deposit 0.00817 ETH';
+
+        tBtn.disabled = false;
+        tBtn.style.cursor = "pointer";
+        tBtn.style.background = "linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%)";
+        tBtn.style.color = "white";
+        tBtn.style.boxShadow = "0 4px 16px rgba(59, 130, 246, 0.25)";
+        tContent.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg> Transfer to Recipient';
+      } else {
+        dBtn.disabled = true;
+        dBtn.style.cursor = "not-allowed";
+        dBtn.style.color = "var(--text-dim)";
+        dContent.textContent = "Only owner can deposit";
+
+        tBtn.disabled = true;
+        tBtn.style.cursor = "not-allowed";
+        tBtn.style.background = "var(--bg-elevated)";
+        tBtn.style.color = "var(--text-dim)";
+        tContent.textContent = "Only owner can transfer";
+      }
+    }
+
+    // ── Header Wallet ──
+    function updateHeaderWallet(account) {
+      const el = document.getElementById("headerWallet");
+      if (!connected || !account) {
+        el.innerHTML = "";
+        return;
+      }
+      el.innerHTML =
+        '<div style="display:flex;align-items:center;gap:8px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:7px 14px;">' +
+          '<div style="width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 6px var(--success);"></div>' +
+          '<span class="font-mono" style="font-size:0.8rem;color:var(--text-muted);">' + abbreviate(account) + '</span>' +
+        '</div>';
+    }
+
+    // ── Copy helper ──
+    function setupCopyClick(rowId, displayId, iconId) {
+      document.getElementById(rowId).addEventListener("click", function() {
+        const addr = document.getElementById(displayId).textContent;
+        navigator.clipboard && navigator.clipboard.writeText(addr);
+        const icon = document.getElementById(iconId);
+        icon.style.color = "var(--success)";
+        icon.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+        setTimeout(function() {
+          icon.style.color = "var(--text-dim)";
+          icon.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        }, 1500);
+      });
+    }
+
+    // ── Load contract data ──
+    async function loadContractData(c) {
+      try {
+        var ownerAddr = await c.OWNER();
+        var recipientAddr = await c.RECIPIENT();
+        var amount = await c.TRANSFER_AMOUNT();
+        document.getElementById("ownerDisplay").textContent = ownerAddr;
+        document.getElementById("payeeDisplay").textContent = recipientAddr;
+        document.getElementById("amountValue").textContent = ethers.formatEther(amount);
+      } catch (e) {
+        console.error("Failed to load contract data:", e);
+        document.getElementById("ownerDisplay").textContent = OWNER_FALLBACK;
+        document.getElementById("payeeDisplay").textContent = RECIPIENT_FALLBACK;
+        document.getElementById("amountValue").textContent = "0.00817";
+      }
+      document.getElementById("amountLoading").style.display = "none";
+      document.getElementById("amountContainer").style.display = "block";
+      await updateContractBalance();
+      updateButtons();
+    }
+
+    // ── Update contract balance display ──
+    async function updateContractBalance() {
+      try {
+        var bal = await contract.getBalance();
+        document.getElementById("contractBalance").textContent = ethers.formatEther(bal) + " ETH";
+      } catch (e) {
+        document.getElementById("contractBalance").textContent = "0.0 ETH";
+      }
+    }
+
+    // ── Connect wallet ──
+    async function connectWallet() {
+      if (typeof window.ethereum === "undefined") {
+        showStatus("error", "No wallet detected. Please install MetaMask.", null);
+        return;
+      }
+      try {
+        provider = new ethers.BrowserProvider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        signer = await provider.getSigner();
+        var addr = await signer.getAddress();
+        contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
+        connected = true;
+
+        try {
+          var ownerAddr = await contract.OWNER();
+          isOwner = addr.toLowerCase() === ownerAddr.toLowerCase();
+        } catch (e) {
+          isOwner = false;
+        }
+
+        updateHeaderWallet(addr);
+        await loadContractData(contract);
+        updateButtons();
+      } catch (err) {
+        showStatus("error", err.shortMessage || err.message || "Failed to connect wallet", null);
+      }
+    }
+
+    // ── Handle deposit ──
+    async function handleDeposit() {
+      if (!contract || !connected || !isOwner || txStatus === "pending") return;
+      showStatus(null);
+      txStatus = "pending";
+      updateButtons();
+      try {
+        var amount = await contract.TRANSFER_AMOUNT();
+        showStatus("pending", "Depositing " + ethers.formatEther(amount) + " ETH into the contract\u2026", null);
+        var tx = await contract.deposit({ value: amount });
+        showStatus("pending", "Waiting for confirmation\u2026", tx.hash);
+        await tx.wait();
+        txStatus = "success";
+        showStatus("success", "Deposited " + ethers.formatEther(amount) + " ETH into the contract.", tx.hash);
+        await updateContractBalance();
+      } catch (err) {
+        txStatus = "error";
+        var msg = err.shortMessage || err.message || "Deposit failed";
+        if (err.code === "ACTION_REJECTED" || err.code === 4001) msg = "Transaction was rejected in your wallet.";
+        showStatus("error", msg, null);
+      }
+      updateButtons();
+    }
+
+    // ── Handle transfer ──
+    async function handleTransfer() {
+      if (!contract || !connected || !isOwner || txStatus === "pending") return;
+      showStatus(null);
+      txStatus = "pending";
+      updateButtons();
+      try {
+        showStatus("pending", "Transferring 0.00817 ETH to the recipient\u2026", null);
+        var tx = await contract.transfer();
+        showStatus("pending", "Waiting for confirmation\u2026", tx.hash);
+        await tx.wait();
+        txStatus = "success";
+        showStatus("success", "Successfully transferred 0.00817 ETH to the recipient.", tx.hash);
+        await updateContractBalance();
+      } catch (err) {
+        txStatus = "error";
+        var msg = err.shortMessage || err.message || "Transfer failed";
+        if (err.code === "ACTION_REJECTED" || err.code === 4001) msg = "Transaction was rejected in your wallet.";
+        showStatus("error", msg, null);
+      }
+      updateButtons();
+    }
+
+    // ── Account change listener ──
+    if (window.ethereum) {
+      window.ethereum.on && window.ethereum.on("accountsChanged", function(accounts) {
+        if (accounts.length === 0) {
+          connected = false;
+          isOwner = false;
+          updateHeaderWallet(null);
+          updateButtons();
+          return;
+        }
+        connectWallet();
+      });
+    }
+
+    // ── Init ──
+    setupCopyClick("payeeRow", "payeeDisplay", "payeeCopyIcon");
+    setupCopyClick("ownerRow", "ownerDisplay", "ownerCopyIcon");
+
+    document.getElementById("depositBtn").addEventListener("click", function() {
+      if (!connected) connectWallet();
+      else handleDeposit();
+    });
+    document.getElementById("transferBtn").addEventListener("click", function() {
+      if (!connected) connectWallet();
+      else handleTransfer();
+    });
+
+    // Show fallback amount immediately
+    document.getElementById("amountLoading").style.display = "none";
+    document.getElementById("amountContainer").style.display = "block";
+  </script>
 </body>
 </html>
