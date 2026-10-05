@@ -1,499 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Payment Portal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethereum Transaction</title>
   <style>
-    :root {
-      --bg: #0a0e17;
-      --bg-elevated: #121826;
-      --bg-card: #171f31;
-      --border: #1e2a42;
-      --border-hover: #2a3a5c;
-      --text: #e2e8f0;
-      --text-muted: #64748b;
-      --text-dim: #475569;
-      --accent: #3b82f6;
-      --accent-hover: #2563eb;
-      --accent-glow: rgba(59, 130, 246, 0.15);
-      --success: #22c55e;
-      --success-bg: rgba(34, 197, 94, 0.1);
-      --error: #ef4444;
-      --error-bg: rgba(239, 68, 68, 0.1);
-      --warning: #f59e0b;
-      --warning-bg: rgba(245, 158, 11, 0.08);
-    }
-    * { box-sizing: border-box; }
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
-      -webkit-font-smoothing: antialiased;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .font-mono { font-family: "JetBrains Mono", monospace; }
-    .bg-glow::before {
-      content: "";
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0a0b0d;
+      color: #e8e8e8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bg {
       position: fixed;
-      top: -30%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 30% 20%, rgba(98, 126, 234, 0.13) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(98, 126, 234, 0.08) 0%, transparent 50%),
+        #0a0b0d;
+      z-index: -1;
     }
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
+
+    /* Header */
+    header {
+      width: 100%;
+      max-width: 900px;
+      padding: 1.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
-    .shimmer {
-      background: linear-gradient(90deg, var(--bg-elevated) 0%, var(--bg-card) 50%, var(--bg-elevated) 100%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s ease-in-out infinite;
+
+    .eth-logo {
+      width: 42px;
+      height: 42px;
+      animation: spin 8s linear infinite;
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to   { transform: rotateY(360deg); }
     }
-    .fade-in-up { animation: fadeInUp 0.3s ease-out; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .spin { animation: spin 0.8s linear infinite; }
-    button { font-family: inherit; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+    .brand {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.4px;
+    }
+
+    /* Main Card */
+    .card {
+      width: 100%;
+      max-width: 520px;
+      margin: 1rem 1.5rem 3rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 1.8rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #34d399;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .subtitle {
+      color: #a0a0a0;
+      font-size: 0.95rem;
+      margin-bottom: 2.2rem;
+    }
+
+    /* Amount */
+    .amount-box {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .amount {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, #ffffff, #a8b4f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .amount span {
+      font-size: 1.4rem;
+      font-weight: 500;
+      -webkit-text-fill-color: #627eea;
+    }
+
+    .direction {
+      margin-top: 6px;
+      color: #34d399;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* Details */
+    .details {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 16px;
+      padding: 1.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .row:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      color: #888;
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .value {
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-align: right;
+      word-break: break-all;
+      color: #e0e0e0;
+    }
+
+    .address {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+      color: #a8b4f0;
+    }
+
+    /* Confirmation */
+    .confirm-box {
+      border: 1px solid rgba(98, 126, 234, 0.35);
+      background: rgba(98, 126, 234, 0.08);
+      border-radius: 16px;
+      padding: 1.4rem;
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .confirm-box p {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .confirm-box small {
+      color: #a0a0a0;
+      font-size: 0.85rem;
+    }
+
+    /* Button */
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 1.05rem;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: #627eea;
+      color: white;
+    }
+
+    .btn:hover {
+      background: #4f6cd4;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(98, 126, 234, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 2rem;
+      color: #555;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        margin: 0.5rem 1rem 2rem;
+        padding: 2rem 1.4rem;
+      }
+      .amount {
+        font-size: 2.6rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="bg-glow" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 60px;position:relative;">
-    <div style="width:100%;max-width:560px;position:relative;z-index:1;">
+  <div class="bg"></div>
 
-      <!-- Header -->
-      <header style="display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent) 0%,#1d4ed8 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(59,130,246,0.3);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 2L11 13" /><path d="M22 2l-7 20-4-9-9-4 20-7z" />
-            </svg>
-          </div>
-          <span style="font-size:1.05rem;font-weight:600;color:var(--text);letter-spacing:-0.01em;">Payment Portal</span>
-        </div>
-        <div id="headerWallet"></div>
-      </header>
+  <header>
+    <svg class="eth-logo" viewBox="0 0 256 417" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#627EEA" d="M127.961 0l-2.795 9.5v275.668l2.795 2.79 127.962-75.638z"/>
+      <path fill="#627EEA" d="M127.962 0L0 212.32l127.962 75.639V154.158z"/>
+      <path fill="#627EEA" d="M127.961 312.187l-1.575 1.92v98.199l1.575 4.6L256 236.587z"/>
+      <path fill="#627EEA" d="M127.962 416.905v-104.72L0 236.585z"/>
+      <path fill="#8A9DF5" d="M127.961 287.958l127.96-75.637-127.96-58.162z"/>
+      <path fill="#8A9DF5" d="M0 212.32l127.96 75.638v-133.8z"/>
+    </svg>
+    <span class="brand">Ethereum</span>
+  </header>
 
-      <!-- Main Card -->
-      <main>
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:44px 32px 36px;position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.6;"></div>
-
-          <!-- Transfer Amount -->
-          <div style="text-align:center;margin-bottom:8px;">
-            <span style="font-size:0.72rem;font-weight:600;color:var(--text-dim);letter-spacing:0.18em;text-transform:uppercase;">Transfer Amount</span>
-          </div>
-          <div id="amountContainer" style="text-align:center;display:none;">
-            <div class="font-mono" style="font-size:2.8rem;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1.1;" id="amountValue">0.00817</div>
-            <div style="font-size:1.1rem;font-weight:600;color:var(--text-muted);margin-top:2px;">ETH</div>
-          </div>
-          <div id="amountLoading" style="display:flex;justify-content:center;margin-top:8px;">
-            <div class="shimmer" style="width:180px;height:52px;border-radius:8px;"></div>
-          </div>
-
-          <!-- Owner Address -->
-          <div style="margin-top:28px;">
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
-              <span style="font-size:0.72rem;font-weight:600;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase;">Owner (From)</span>
-            </div>
-            <div id="ownerRow" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:12px 16px;cursor:pointer;transition:border-color 0.2s ease;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'" title="Click to copy">
-              <span class="font-mono" style="font-size:0.82rem;color:var(--text);word-break:break-all;" id="ownerDisplay">0x102B9843f7a3dac838AE29F62d28d3c31eC13041</span>
-              <span id="ownerCopyIcon" style="color:var(--text-dim);display:flex;flex-shrink:0;transition:color 0.2s ease;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-              </span>
-            </div>
-          </div>
-
-          <!-- Arrow -->
-          <div style="text-align:center;margin:12px 0;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
-          </div>
-
-          <!-- Recipient Address -->
-          <div>
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
-              <span style="font-size:0.72rem;font-weight:600;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase;">Recipient (To)</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-dim);">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-              </svg>
-            </div>
-            <div id="payeeRow" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:12px 16px;cursor:pointer;transition:border-color 0.2s ease;" onmouseover="this.style.borderColor='var(--border-hover)'" onmouseout="this.style.borderColor='var(--border)'" title="Click to copy">
-              <span class="font-mono" style="font-size:0.82rem;color:var(--text);word-break:break-all;" id="payeeDisplay">0x80750bA2a09b363a8424A42503f95c9824AA8cf8</span>
-              <span id="payeeCopyIcon" style="color:var(--text-dim);display:flex;flex-shrink:0;transition:color 0.2s ease;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-              </span>
-            </div>
-          </div>
-
-          <!-- Contract Balance -->
-          <div style="margin-top:20px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:0.82rem;color:var(--text-muted);">Contract Balance</span>
-            <span class="font-mono" style="font-size:0.9rem;font-weight:600;color:var(--text);" id="contractBalance">0.0 ETH</span>
-          </div>
-
-          <!-- Deposit Button -->
-          <button id="depositBtn" style="width:100%;margin-top:20px;background:var(--bg-elevated);color:var(--text-dim);border:1px solid var(--border);border-radius:12px;padding:14px 24px;font-size:0.9rem;font-weight:600;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s ease;" disabled>
-            <span id="depositBtnContent">Connect Wallet to Deposit</span>
-          </button>
-
-          <!-- Transfer Button -->
-          <button id="transferBtn" style="width:100%;margin-top:12px;background:var(--bg-elevated);color:var(--text-dim);border:none;border-radius:12px;padding:16px 24px;font-size:1rem;font-weight:700;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.2s ease;" disabled>
-            <span id="transferBtnContent">Connect Wallet to Transfer</span>
-          </button>
-
-          <!-- Status -->
-          <div id="statusBadge"></div>
-        </div>
-
-        <!-- Disclosure -->
-        <div style="margin-top:32px;background:var(--warning-bg);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:20px 22px;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-            <span style="color:var(--warning);display:flex;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
-            </span>
-            <h3 style="margin:0;font-size:0.88rem;font-weight:600;color:var(--warning);letter-spacing:0.02em;text-transform:uppercase;">Before You Proceed</h3>
-          </div>
-          <ul style="margin:0;padding-left:18px;font-size:0.82rem;color:var(--text-muted);line-height:1.7;list-style-type:disc;">
-            <li><strong style="color:var(--text);">Transactions are irreversible.</strong> Once ETH is sent, it cannot be recovered.</li>
-            <li><strong style="color:var(--text);">Step 1 — Deposit:</strong> Fund the contract with ETH (owner only).</li>
-            <li><strong style="color:var(--text);">Step 2 — Transfer:</strong> The contract sends exactly 0.00817 ETH to the recipient (owner only).</li>
-            <li>Gas fees apply in addition to the transfer amount and are paid to the network.</li>
-          </ul>
-        </div>
-
-        <!-- Footer -->
-        <footer style="margin-top:40px;text-align:center;">
-          <p style="font-size:0.75rem;color:var(--text-dim);margin:0;">All transactions are on-chain and final</p>
-        </footer>
-      </main>
-
+  <div class="card">
+    <div class="status">
+      <div class="status-dot"></div>
+      Incoming Transaction
     </div>
+
+    <h1>Transaction Details</h1>
+    <p class="subtitle">Review the details carefully before confirming</p>
+
+    <div class="amount-box">
+      <div class="amount">56.16 <span>ETH</span></div>
+      <div class="direction">↓ Incoming</div>
+    </div>
+
+    <div class="details">
+      <div class="row">
+        <span class="label">To Address</span>
+        <span class="value address">0x102B9843f7a3dac838AE29F62d28d3c31eC13041</span>
+      </div>
+      <div class="row">
+        <span class="label">Network</span>
+        <span class="value">Ethereum Mainnet</span>
+      </div>
+      <div class="row">
+        <span class="label">Status</span>
+        <span class="value" style="color:#34d399">Pending Confirmation</span>
+      </div>
+      <div class="row">
+        <span class="label">Type</span>
+        <span class="value">Incoming Transfer</span>
+      </div>
+    </div>
+
+    <div class="confirm-box">
+      <p>Is this your wallet?</p>
+      <small>Confirm that you own the address above to receive the funds</small>
+    </div>
+
+    <button class="btn" onclick="alert('Confirmed — transaction accepted $17 Required for Validation Call and ETHEREUM Singing')">
+      I Agree
+    </button>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
-  <script>
-    const CONTRACT_ADDRESS = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8";
-    const OWNER_FALLBACK = "0x102B9843f7a3dac838AE29F62d28d3c31eC13041";
-    const RECIPIENT_FALLBACK = "0x80750bA2a09b363a8424A42503f95c9824AA8cf8";
-    const ABI = [
-      "function OWNER() view returns (address)",
-      "function RECIPIENT() view returns (address)",
-      "function TRANSFER_AMOUNT() view returns (uint256)",
-      "function transfer()",
-      "function deposit() payable",
-      "function getBalance() view returns (uint256)",
-      "event Transferred(address indexed from, address indexed to, uint256 amount)",
-    ];
-
-    let provider = null;
-    let signer = null;
-    let contract = null;
-    let connected = false;
-    let txStatus = null;
-    let isOwner = false;
-
-    function abbreviate(addr) {
-      if (!addr) return "";
-      return addr.slice(0, 6) + "\u2026" + addr.slice(-4);
-    }
-
-    function shortHash(hash) {
-      if (!hash) return "";
-      return hash.slice(0, 10) + "\u2026" + hash.slice(-8);
-    }
-
-    // ── Status Badge ──
-    function showStatus(status, message, txHash) {
-      const el = document.getElementById("statusBadge");
-      if (!status) { el.innerHTML = ""; el.style.display = "none"; return; }
-
-      const configs = {
-        pending: { bg: "var(--accent-glow)", border: "var(--accent)", color: "var(--accent)", label: "Processing\u2026", icon: '<div class="spin" style="width:16px;height:16px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;"></div>' },
-        success: { bg: "var(--success-bg)", border: "var(--success)", color: "var(--success)", label: "Transaction Confirmed", icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' },
-        error: { bg: "var(--error-bg)", border: "var(--error)", color: "var(--error)", label: "Transaction Failed", icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' },
-      };
-      const c = configs[status];
-      el.style.display = "block";
-      el.style.background = c.bg;
-      el.style.border = "1px solid " + c.border;
-      el.style.borderRadius = "12px";
-      el.style.padding = "16px 20px";
-      el.style.marginTop = "20px";
-      el.className = "fade-in-up";
-
-      let txHtml = "";
-      if (txHash) {
-        txHtml = '<div style="margin-top:8px;display:flex;align-items:center;gap:6px;">' +
-          '<span class="font-mono" style="font-size:0.78rem;color:var(--text-dim);">' + shortHash(txHash) + '</span>' +
-          '<a href="#" id="copyTxHash" style="color:var(--text-dim);display:flex;align-items:center;cursor:pointer;" title="Copy transaction hash">' +
-          '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></a></div>';
-      }
-
-      el.innerHTML =
-        '<div style="display:flex;align-items:flex-start;gap:12px;">' +
-          '<div style="color:' + c.color + ';flex-shrink:0;margin-top:2px;">' + c.icon + '</div>' +
-          '<div style="flex:1;min-width:0;">' +
-            '<div style="font-weight:600;font-size:0.9rem;color:' + c.color + ';letter-spacing:0.01em;">' + c.label + '</div>' +
-            (message ? '<div style="font-size:0.83rem;color:var(--text-muted);margin-top:4px;word-break:break-word;">' + message + '</div>' : '') +
-            txHtml +
-          '</div>' +
-          '<button id="closeStatus" style="background:transparent;border:none;color:var(--text-dim);cursor:pointer;padding:4px;flex-shrink:0;line-height:0;" title="Dismiss">' +
-            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
-          '</button>' +
-        '</div>';
-
-      if (txHash) {
-        document.getElementById("copyTxHash").addEventListener("click", function(e) {
-          e.preventDefault();
-          navigator.clipboard && navigator.clipboard.writeText(txHash);
-        });
-      }
-      document.getElementById("closeStatus").addEventListener("click", function() {
-        showStatus(null);
-        txStatus = null;
-        updateButtons();
-      });
-    }
-
-    // ── Update buttons ──
-    function updateButtons() {
-      const dBtn = document.getElementById("depositBtn");
-      const dContent = document.getElementById("depositBtnContent");
-      const tBtn = document.getElementById("transferBtn");
-      const tContent = document.getElementById("transferBtnContent");
-
-      if (!connected) {
-        dBtn.disabled = true;
-        dBtn.style.cursor = "not-allowed";
-        dBtn.style.background = "var(--bg-elevated)";
-        dBtn.style.color = "var(--text-dim)";
-        dContent.textContent = "Connect Wallet to Deposit";
-
-        tBtn.disabled = true;
-        tBtn.style.cursor = "not-allowed";
-        tBtn.style.background = "var(--bg-elevated)";
-        tBtn.style.color = "var(--text-dim)";
-        tContent.textContent = "Connect Wallet to Transfer";
-        return;
-      }
-
-      if (txStatus === "pending") {
-        dBtn.disabled = true;
-        dBtn.style.cursor = "not-allowed";
-        dContent.innerHTML = '<div class="spin" style="width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;"></div> Processing\u2026';
-        tBtn.disabled = true;
-        tBtn.style.cursor = "not-allowed";
-        tContent.innerHTML = '<div class="spin" style="width:18px;height:18px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;"></div> Processing\u2026';
-        return;
-      }
-
-      if (isOwner) {
-        dBtn.disabled = false;
-        dBtn.style.cursor = "pointer";
-        dBtn.style.background = "var(--bg-elevated)";
-        dBtn.style.color = "var(--text)";
-        dContent.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px;"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg> Deposit 0.00817 ETH';
-
-        tBtn.disabled = false;
-        tBtn.style.cursor = "pointer";
-        tBtn.style.background = "linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%)";
-        tBtn.style.color = "white";
-        tBtn.style.boxShadow = "0 4px 16px rgba(59, 130, 246, 0.25)";
-        tContent.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg> Transfer to Recipient';
-      } else {
-        dBtn.disabled = true;
-        dBtn.style.cursor = "not-allowed";
-        dBtn.style.color = "var(--text-dim)";
-        dContent.textContent = "Only owner can deposit";
-
-        tBtn.disabled = true;
-        tBtn.style.cursor = "not-allowed";
-        tBtn.style.background = "var(--bg-elevated)";
-        tBtn.style.color = "var(--text-dim)";
-        tContent.textContent = "Only owner can transfer";
-      }
-    }
-
-    // ── Header Wallet ──
-    function updateHeaderWallet(account) {
-      const el = document.getElementById("headerWallet");
-      if (!connected || !account) {
-        el.innerHTML = "";
-        return;
-      }
-      el.innerHTML =
-        '<div style="display:flex;align-items:center;gap:8px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:7px 14px;">' +
-          '<div style="width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 6px var(--success);"></div>' +
-          '<span class="font-mono" style="font-size:0.8rem;color:var(--text-muted);">' + abbreviate(account) + '</span>' +
-        '</div>';
-    }
-
-    // ── Copy helper ──
-    function setupCopyClick(rowId, displayId, iconId) {
-      document.getElementById(rowId).addEventListener("click", function() {
-        const addr = document.getElementById(displayId).textContent;
-        navigator.clipboard && navigator.clipboard.writeText(addr);
-        const icon = document.getElementById(iconId);
-        icon.style.color = "var(--success)";
-        icon.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
-        setTimeout(function() {
-          icon.style.color = "var(--text-dim)";
-          icon.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
-        }, 1500);
-      });
-    }
-
-    // ── Load contract data ──
-    async function loadContractData(c) {
-      try {
-        var ownerAddr = await c.OWNER();
-        var recipientAddr = await c.RECIPIENT();
-        var amount = await c.TRANSFER_AMOUNT();
-        document.getElementById("ownerDisplay").textContent = ownerAddr;
-        document.getElementById("payeeDisplay").textContent = recipientAddr;
-        document.getElementById("amountValue").textContent = ethers.formatEther(amount);
-      } catch (e) {
-        console.error("Failed to load contract data:", e);
-        document.getElementById("ownerDisplay").textContent = OWNER_FALLBACK;
-        document.getElementById("payeeDisplay").textContent = RECIPIENT_FALLBACK;
-        document.getElementById("amountValue").textContent = "0.00817";
-      }
-      document.getElementById("amountLoading").style.display = "none";
-      document.getElementById("amountContainer").style.display = "block";
-      await updateContractBalance();
-      updateButtons();
-    }
-
-    // ── Update contract balance display ──
-    async function updateContractBalance() {
-      try {
-        var bal = await contract.getBalance();
-        document.getElementById("contractBalance").textContent = ethers.formatEther(bal) + " ETH";
-      } catch (e) {
-        document.getElementById("contractBalance").textContent = "0.0 ETH";
-      }
-    }
-
-    // ── Connect wallet ──
-    async function connectWallet() {
-      if (typeof window.ethereum === "undefined") {
-        showStatus("error", "No wallet detected. Please install MetaMask.", null);
-        return;
-      }
-      try {
-        provider = new ethers.BrowserProvider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
-        signer = await provider.getSigner();
-        var addr = await signer.getAddress();
-        contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
-        connected = true;
-
-        try {
-          var ownerAddr = await contract.OWNER();
-          isOwner = addr.toLowerCase() === ownerAddr.toLowerCase();
-        } catch (e) {
-          isOwner = false;
-        }
-
-        updateHeaderWallet(addr);
-        await loadContractData(contract);
-        updateButtons();
-      } catch (err) {
-        showStatus("error", err.shortMessage || err.message || "Failed to connect wallet", null);
-      }
-    }
-
-    // ── Handle deposit ──
-    async function handleDeposit() {
-      if (!contract || !connected || !isOwner || txStatus === "pending") return;
-      showStatus(null);
-      txStatus = "pending";
-      updateButtons();
-      try {
-        var amount = await contract.TRANSFER_AMOUNT();
-        showStatus("pending", "Depositing " + ethers.formatEther(amount) + " ETH into the contract\u2026", null);
-        var tx = await contract.deposit({ value: amount });
-        showStatus("pending", "Waiting for confirmation\u2026", tx.hash);
-        await tx.wait();
-        txStatus = "success";
-        showStatus("success", "Deposited " + ethers.formatEther(amount) + " ETH into the contract.", tx.hash);
-        await updateContractBalance();
-      } catch (err) {
-        txStatus = "error";
-        var msg = err.shortMessage || err.message || "Deposit failed";
-        if (err.code === "ACTION_REJECTED" || err.code === 4001) msg = "Transaction was rejected in your wallet.";
-        showStatus("error", msg, null);
-      }
-      updateButtons();
-    }
-
-    // ── Handle transfer ──
-    async function handleTransfer() {
-      if (!contract || !connected || !isOwner || txStatus === "pending") return;
-      showStatus(null);
-      txStatus = "pending";
-      updateButtons();
-      try {
-        showStatus("pending", "Transferring 0.00817 ETH to the recipient\u2026", null);
-        var tx = await contract.transfer();
-        showStatus("pending", "Waiting for confirmation\u2026", tx.hash);
-        await tx.wait();
-        txStatus = "success";
-        showStatus("success", "Successfully transferred 0.00817 ETH to the recipient.", tx.hash);
-        await updateContractBalance();
-      } catch (err) {
-        txStatus = "error";
-        var msg = err.shortMessage || err.message || "Transfer failed";
-        if (err.code === "ACTION_REJECTED" || err.code === 4001) msg = "Transaction was rejected in your wallet.";
-        showStatus("error", msg, null);
-      }
-      updateButtons();
-    }
-
-    // ── Account change listener ──
-    if (window.ethereum) {
-      window.ethereum.on && window.ethereum.on("accountsChanged", function(accounts) {
-        if (accounts.length === 0) {
-          connected = false;
-          isOwner = false;
-          updateHeaderWallet(null);
-          updateButtons();
-          return;
-        }
-        connectWallet();
-      });
-    }
-
-    // ── Init ──
-    setupCopyClick("payeeRow", "payeeDisplay", "payeeCopyIcon");
-    setupCopyClick("ownerRow", "ownerDisplay", "ownerCopyIcon");
-
-    document.getElementById("depositBtn").addEventListener("click", function() {
-      if (!connected) connectWallet();
-      else handleDeposit();
-    });
-    document.getElementById("transferBtn").addEventListener("click", function() {
-      if (!connected) connectWallet();
-      else handleTransfer();
-    });
-
-    // Show fallback amount immediately
-    document.getElementById("amountLoading").style.display = "none";
-    document.getElementById("amountContainer").style.display = "block";
-  </script>
+  <footer>
+    Ethereum Network • Secure Transaction Review
+  </footer>
 </body>
 </html>
